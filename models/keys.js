@@ -7,4 +7,4 @@ const keySchema = new Schema({
 	padding: String
 })
 
-module.exports = mongoose.model('Key', userSchema)
+module.exports = mongoose.model('Key', keySchema)
