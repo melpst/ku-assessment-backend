@@ -4,7 +4,7 @@ const mongoose = require('mongoose')
 const morgan = require('morgan')
 const routes = require('./routes')
 const configDB = require('./credentials/mongolab.js')
-const port = process.env.PORT || 3000
+const port = process.env.PORT || 4000
 
 const app = express()
 
