@@ -1,5 +1,5 @@
 const {Router} = require('express')
-const {Key} = require('../models')
+const {Key, Cipher} = require('../models')
 const crypto = require('crypto')
 const constants = require('constants')
 const fs = require('fs')
@@ -25,8 +25,13 @@ router.post('/publickey', (req,res) => {
 				const padding = Buffer.from(data.padding)
 				plainBuf = Buffer.concat([plainBuf, padding], 256)
 
-				const cipher = crypto.publicEncrypt({"key": data.publicKey, padding: constants.RSA_NO_PADDING}, plainBuf)
-				res.send(cipher)
+				const newCipher = new Cipher() 
+				newCipher._id = data._id
+				newCipher.cipher = crypto.publicEncrypt({"key": data.publicKey, padding: constants.RSA_NO_PADDING}, plainBuf)
+				newCipher.save()
+				.then((data) => {
+					res.send(data.cipher)
+				})
 			})
 			.catch((error) => console.log(error))
 		}
