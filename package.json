@@ -1,0 +1,26 @@
+{
+  "name": "express-boilerplate",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/melpst/express-boilerplate.git"
+  },
+  "author": "Jitlada Supreeyaporn",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/melpst/express-boilerplate/issues"
+  },
+  "homepage": "https://github.com/melpst/express-boilerplate#readme",
+  "dependencies": {
+    "bluebird": "^3.5.0",
+    "body-parser": "^1.17.1",
+    "express": "^4.15.2",
+    "mongoose": "^4.9.5",
+    "morgan": "^1.8.1"
+  }
+}
