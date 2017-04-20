@@ -1,4 +1,5 @@
 const {Router} = require('express')
+const axios = require('axios')
 const {Key, Cipher} = require('../models')
 const key = require('./key')
 const subjects = require('./subjects')
@@ -11,6 +12,7 @@ router.use('/subjects', subjects)
 router.get('/', (req,res) => res.send('hello, world'))
 
 router.get('/cipher', (req, res) => {
+	console.log('/cipher')
 	Cipher.find()
 	.then((data) => {
 		res.send(data)
