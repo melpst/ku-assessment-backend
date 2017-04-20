@@ -1,4 +1,5 @@
 const {Router} = require('express')
+const axios = require('axios')
 
 const router = Router()
 
@@ -9,7 +10,10 @@ router.get('/:subjectId', (req, res) => {
 		res.send('can assess')
 	}
 	else{
-		res.send('cannot assess')
+		axios.get('http://localhost:4000/cipher')
+		.then((response) => {
+			res.send(response.data)
+		})
 	}
 })
 
