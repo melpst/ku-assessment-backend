@@ -24,10 +24,12 @@ router.post('/publickey', (req,res) => {
 				let plainBuf = Buffer.from(plain)
 				const padding = Buffer.from(data.padding)
 				plainBuf = Buffer.concat([plainBuf, padding], 256)
+				const cipher = crypto.publicEncrypt({"key": data.publicKey, padding: constants.RSA_NO_PADDING}, plainBuf)
 
 				const newCipher = new Cipher() 
 				newCipher._id = data._id
-				newCipher.cipher = crypto.publicEncrypt({"key": data.publicKey, padding: constants.RSA_NO_PADDING}, plainBuf)
+				newCipher.cipher = cipher.toString('hex')
+
 				newCipher.save()
 				.then((data) => {
 					res.send(data._id)
