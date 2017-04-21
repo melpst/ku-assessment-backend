@@ -13,7 +13,6 @@ router.use('/subjects', subjects)
 router.get('/', (req,res) => res.send('hello, world'))
 
 router.get('/cipher', (req, res) => {
-	console.log('/cipher')
 	Cipher.find()
 	.then((data) => {
 		res.send(data)
@@ -23,7 +22,10 @@ router.get('/cipher', (req, res) => {
 router.post('/checkword', (req, res) => {
 	const plain = fs.readFileSync('./file.txt', 'utf8')
 	if(plain === req.body.word){
-		res.send({success: true})
+		axios.get('http://localhost:4000/key/publickey')
+		.then((response) => {
+			res.send(response.data)
+		})
 	}
 	else{
 		res.send({success: false})
