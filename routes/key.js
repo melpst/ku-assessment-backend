@@ -8,6 +8,13 @@ const router = Router()
 
 router.get('/', (req,res) => res.send('this is key page'))
 
+router.get('/publicKey', (req,res) => {
+	Key.find()
+	.then((data) => {
+		res.send(data)
+	})
+})
+
 router.post('/publickey', (req,res) => {
 	Key.findOne({publicKey: req.body.publicKey})
 	.then((data) => {
