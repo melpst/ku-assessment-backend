@@ -2,6 +2,7 @@ const {Router} = require('express')
 const {Key, Cipher} = require('../models')
 const constants = require('constants')
 const crypto = require('crypto')
+const axios = require('axios')
 const fs = require('fs')
 
 const router = Router()
@@ -13,6 +14,7 @@ router.get('/publicKey', (req,res) => {
 	.then((data) => {
 		res.send(data)
 	})
+	.catch((error) => res.send({success: false}))
 })
 
 router.post('/publickey', (req,res) => {
