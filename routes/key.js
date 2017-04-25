@@ -18,10 +18,13 @@ router.get('/publicKey', (req,res) => {
 })
 
 router.post('/publickey', (req,res) => {
+	const plain = fs.readFileSync('./file.txt', 'utf8')
+	let plainBuf = Buffer.from(plain)
 	Key.findOne({publicKey: req.body.publicKey})
 	.then((data) => {
 		if(!data){
-			const padding = crypto.randomBytes(10)
+			const paddingLength = 256-plain.length
+			const padding = crypto.randomBytes(paddingLength)
 
 			const newKey = new Key()
 			newKey.publicKey = req.body.publicKey
@@ -29,8 +32,7 @@ router.post('/publickey', (req,res) => {
 
 			newKey.save()
 			.then((data) => {
-				const plain = fs.readFileSync('./file.txt', 'utf8')
-				let plainBuf = Buffer.from(plain)
+				
 				const padding = Buffer.from(data.padding)
 				plainBuf = Buffer.concat([plainBuf, padding], 256)
 				const cipher = crypto.publicEncrypt({"key": data.publicKey, padding: constants.RSA_NO_PADDING}, plainBuf)
