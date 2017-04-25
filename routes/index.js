@@ -20,6 +20,7 @@ router.get('/auth', (req, res) => {
 			res.send({success: true})
 		}
 		else{
+			console.log('state == false')
 			axios.get('http://localhost:4000/cipher')
 			.then((response) => {
 				res.send(response.data)
@@ -50,5 +51,6 @@ router.post('/checkword', (req, res) => {
 		res.send({success: false})
 	}
 })
+
 
 module.exports = router
