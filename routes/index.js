@@ -7,6 +7,9 @@ const subjects = require('./subjects')
 
 const router = Router()
 
+const keygenIP = 'http://158.108.33.51:3000'
+const assessIP = 'http://158.108.33.33:4000'
+
 router.use('/key', key)
 router.use('/subjects', subjects)
 
@@ -22,7 +25,7 @@ router.get('/auth', (req, res) => {
 		else{
 			console.log('State = false; Redirecting to /cipher')
 			console.log('==========================================')
-			axios.get('http://localhost:4000/cipher')
+			axios.get(assessIP+'/cipher')
 			.then((response) => {
 				res.send(response.data)
 			})
@@ -47,7 +50,7 @@ router.post('/checkword', (req, res) => {
 	if(plain === req.body.word){
 		console.log('Word is correct. Sending public keys and paddings for checking cipher similarity')
 		console.log('==========================================')
-		axios.get('http://localhost:4000/key/publickey')
+		axios.get(assessIP+'/key/publickey')
 		.then((response) => {
 			res.send(response.data)
 		})
